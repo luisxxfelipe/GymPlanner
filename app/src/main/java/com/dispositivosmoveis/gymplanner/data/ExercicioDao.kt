@@ -1,0 +1,27 @@
+package com.dispositivosmoveis.gymplanner.data
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface ExercicioDao{
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(exercicio: Exercicio)
+
+    @Update
+    suspend fun update(exercicio: Exercicio)
+
+    @Delete
+    suspend fun delete(exercicio: Exercicio)
+
+    @Query ("SELECT * FROM exercicios WHERE treinoId = :treinoId")
+    suspend fun getExerciciosByTreinoId(treinoId: Int): Flow <List<Exercicio>>
+
+
+
+}
