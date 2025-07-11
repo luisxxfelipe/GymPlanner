@@ -20,7 +20,7 @@ interface ExercicioDao{
     suspend fun delete(exercicio: Exercicio)
 
     @Query ("SELECT * FROM exercicios WHERE treinoId = :treinoId")
-    suspend fun getExerciciosByTreinoId(treinoId: Int): Flow <List<Exercicio>>
+    fun getExerciciosByTreinoId(treinoId: Int): Flow <List<Exercicio>>
 
 
 

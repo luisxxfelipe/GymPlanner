@@ -21,6 +21,6 @@ interface TreinoDao{
     suspend fun delete(treino: Treino)
 
     @Query("SELECT * FROM treinos")
-    suspend fun getAllTreinos(): Flow<List<Treino>>
+    fun getAllTreinos(): Flow<List<Treino>>
 
 }
