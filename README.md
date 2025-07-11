@@ -21,4 +21,4 @@ Banco de dados local (SQLite/Room) com duas tabelas relacionadas:
 ## Como rodar
 Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/gymplanner.git
+git clone https://github.com/luisxxfelipe/gymplanner.git
