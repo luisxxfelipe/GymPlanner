@@ -1,4 +1,7 @@
 package com.dispositivosmoveis.gymplanner.ui.exercicios
 
-class ExercicioFormActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class ExercicioFormActivity : AppCompatActivity() {
+
 }

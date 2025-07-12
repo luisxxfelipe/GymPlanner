@@ -22,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="Adicionar Treino"
-        app:tint="@android:color/white"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/roxo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>

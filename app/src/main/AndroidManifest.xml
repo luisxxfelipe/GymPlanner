@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.treinos.TreinosActivity" />
+        <activity android:name=".ui.treinos.TreinoFormActivity" />
+        <activity android:name=".ui.exercicios.ExercicioFormActivity" />
     </application>
 
 </manifest>

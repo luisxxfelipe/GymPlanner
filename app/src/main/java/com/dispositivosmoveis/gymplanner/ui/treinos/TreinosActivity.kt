@@ -41,9 +41,10 @@ class TreinosActivity: AppCompatActivity() {
 
         }
 
+        val fabAddTreino: FloatingActionButton = findViewById(R.id.fabAddTreino)
         fabAddTreino.setOnClickListener {
-            startActivity(Intent(this, TreinoFormActivity::class.java))
+            val intent = Intent(this, TreinoFormActivity::class.java)
+            startActivity(intent)
         }
-
     }
 }
