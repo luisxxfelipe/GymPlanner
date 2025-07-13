@@ -8,26 +8,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dispositivosmoveis.gymplanner.R
 import com.dispositivosmoveis.gymplanner.data.Treino
 
-class TreinoAdapter (
-    private val treinos: List<Treino>
+class TreinoAdapter(
+    private val treinos: List<Treino>,
+    private val onItemClick: (Treino) -> Unit
 ) : RecyclerView.Adapter<TreinoAdapter.TreinoViewHolder>() {
+
     inner class TreinoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvNomeTreino: TextView = itemView.findViewById(R.id.tvNomeTreino)
-        val tvObjetivoTreino: TextView = itemView.findViewById(R.id.tvObjetivoTreino)
+        val tvNome: TextView = itemView.findViewById(R.id.tvNomeTreino)
+        val tvObjetivo: TextView = itemView.findViewById(R.id.tvObjetivoTreino)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TreinoViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_treino, parent, false)
-        return TreinoViewHolder(itemView)
+        return TreinoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TreinoViewHolder, position: Int) {
         val treino = treinos[position]
-        holder.tvNomeTreino.text = treino.nome
-        holder.tvObjetivoTreino.text = treino.objetivos
+        holder.tvNome.text = treino.nome
+        holder.tvObjetivo.text = treino.objetivos
+
+        holder.itemView.setOnClickListener {
+            onItemClick(treino)
+        }
     }
 
     override fun getItemCount(): Int = treinos.size
 }
-

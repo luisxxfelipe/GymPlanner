@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dispositivosmoveis.gymplanner.R
 import com.dispositivosmoveis.gymplanner.data.AppDatabase
 import com.dispositivosmoveis.gymplanner.repository.TreinoRepository
+import com.dispositivosmoveis.gymplanner.ui.exercicios.ExerciciosActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
@@ -35,10 +36,13 @@ class TreinosActivity: AppCompatActivity() {
 
         lifecycleScope.launch {
             treinoRepository.listarTreinos.collect { treinos ->
-                treinoAdapter = TreinoAdapter(treinos)
+                treinoAdapter = TreinoAdapter(treinos) { treino ->
+                    val intent = Intent(this@TreinosActivity, ExerciciosActivity::class.java)
+                    intent.putExtra("treinoId", treino.id.toLong())
+                    startActivity(intent)
+                }
                 recyclerViewTreinos.adapter = treinoAdapter
             }
-
         }
 
         val fabAddTreino: FloatingActionButton = findViewById(R.id.fabAddTreino)

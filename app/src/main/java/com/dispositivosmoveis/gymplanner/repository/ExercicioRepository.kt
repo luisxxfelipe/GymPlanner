@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 class ExercicioRepository(private val exercicioDao: ExercicioDao) {
 
-    fun listarExerciciosPorTreino(treinoId: Int): Flow<List<Exercicio>>{
+    fun listarExerciciosPorTreino(treinoId: Long): Flow<List<Exercicio>>{
         return exercicioDao.getExerciciosByTreinoId(treinoId)
     }
 

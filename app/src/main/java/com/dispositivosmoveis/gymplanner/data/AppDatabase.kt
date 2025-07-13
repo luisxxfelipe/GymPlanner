@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Treino::class, Exercicio::class], version = 1, exportSchema = false)
+@Database(entities = [Treino::class, Exercicio::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun treinoDao(): TreinoDao
@@ -21,7 +21,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "gymplanner_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration(false).build()
                 INSTANCE = instance
                 instance
             }

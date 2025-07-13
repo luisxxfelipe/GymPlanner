@@ -24,6 +24,7 @@
         <activity android:name=".ui.treinos.TreinosActivity" />
         <activity android:name=".ui.treinos.TreinoFormActivity" />
         <activity android:name=".ui.exercicios.ExercicioFormActivity" />
+        <activity android:name=".ui.exercicios.ExerciciosActivity" />
     </application>
 
 </manifest>

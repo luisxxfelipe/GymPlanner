@@ -1,6 +1,8 @@
 package com.dispositivosmoveis.gymplanner.ui.treinos
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dispositivosmoveis.gymplanner.R
 import com.dispositivosmoveis.gymplanner.data.AppDatabase
 import com.dispositivosmoveis.gymplanner.data.Treino
+import com.dispositivosmoveis.gymplanner.ui.exercicios.ExerciciosActivity
 import kotlin.concurrent.thread
 
 class TreinoFormActivity: AppCompatActivity() {
@@ -17,7 +20,7 @@ class TreinoFormActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_exercicio_form)
+        setContentView(R.layout.activity_treino_form)
 
         etNomeTreino = findViewById(R.id.etNomeTreino)
         etObjetivoTreino = findViewById(R.id.etObjetivoTreino)
@@ -47,9 +50,14 @@ class TreinoFormActivity: AppCompatActivity() {
         val treino = Treino(nome = nome, objetivos = objetivo)
 
         thread {
-            AppDatabase.getDatabase(this).treinoDao().insert(treino)
+            val context = applicationContext
+            val treinoId = AppDatabase.getDatabase(context).treinoDao().insert(treino)
             runOnUiThread {
                 Toast.makeText(this, "Treino salvo com sucesso", Toast.LENGTH_SHORT).show()
+                Log.d("TreinoFormActivity", "ID do treino inserido: $treinoId")
+                val intent = Intent(this, ExerciciosActivity::class.java)
+                intent.putExtra("treinoId", treinoId)
+                startActivity(intent)
                 finish()
             }
         }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TreinoDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(treino: Treino)
+    fun insert(treino: Treino) : Long
 
     @Update
     suspend fun update(treino: Treino)
