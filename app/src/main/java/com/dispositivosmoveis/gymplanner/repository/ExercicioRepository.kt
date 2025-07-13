@@ -1,7 +1,7 @@
 package com.dispositivosmoveis.gymplanner.repository
 
-import com.dispositivosmoveis.gymplanner.data.Exercicio
-import com.dispositivosmoveis.gymplanner.data.ExercicioDao
+import com.dispositivosmoveis.gymplanner.entities.Exercicio
+import com.dispositivosmoveis.gymplanner.dao.ExercicioDao
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -15,7 +15,7 @@ class ExercicioRepository(private val exercicioDao: ExercicioDao) {
         return exercicioDao.getExerciciosByTreinoId(treinoId)
     }
 
-    suspend fun inserirExercicio(exercicio: Exercicio){
+    fun inserirExercicio(exercicio: Exercicio){
         exercicioDao.insert(exercicio)
     }
 

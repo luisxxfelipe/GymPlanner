@@ -6,10 +6,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.dispositivosmoveis.gymplanner.R
-import com.dispositivosmoveis.gymplanner.data.AppDatabase
-import com.dispositivosmoveis.gymplanner.data.Exercicio
-import kotlin.concurrent.thread
+import com.dispositivosmoveis.gymplanner.database.AppDatabase
+import com.dispositivosmoveis.gymplanner.entities.Exercicio
+import com.dispositivosmoveis.gymplanner.repository.ExercicioRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ExercicioFormActivity : AppCompatActivity() {
 
@@ -46,11 +50,7 @@ class ExercicioFormActivity : AppCompatActivity() {
         val descricao = etDescricaoExercicio.text.toString()
         val series = etSeries.text.toString().toIntOrNull()
 
-        Log.d("ExercicioFormActivity", "Nome: $nome" + " Repetições: $repeticoes" + " Descrição: $descricao" + " Series: $series" + " TreinoId: $treinoId")
-
         if (nome.isBlank() || descricao.isBlank() || repeticoes == null || series == null || treinoId.toInt() == -1) {
-            // mostrar log dos dados recebidos
-
             Toast.makeText(
                 this,
                 "Por favor, preencha todos os campos corretamente",
@@ -67,13 +67,18 @@ class ExercicioFormActivity : AppCompatActivity() {
             treinoId = treinoId
         )
 
-        thread {
-            AppDatabase.getDatabase(this).exercicioDao().insert(exercicio)
-            runOnUiThread {
-                Toast.makeText(this, "Exercício salvo com sucesso", Toast.LENGTH_SHORT).show()
+        val exercicioRepository = ExercicioRepository(AppDatabase.getDatabase(this).exercicioDao())
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            exercicioRepository.inserirExercicio(exercicio)
+            withContext(Dispatchers.Main) {
+                Toast.makeText(
+                    this@ExercicioFormActivity,
+                    "Exercício salvo com sucesso!",
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
     }
-
 }

@@ -1,17 +1,18 @@
 package com.dispositivosmoveis.gymplanner.ui.treinos
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.dispositivosmoveis.gymplanner.R
-import com.dispositivosmoveis.gymplanner.data.AppDatabase
-import com.dispositivosmoveis.gymplanner.data.Treino
-import com.dispositivosmoveis.gymplanner.ui.exercicios.ExerciciosActivity
-import kotlin.concurrent.thread
+import com.dispositivosmoveis.gymplanner.database.AppDatabase
+import com.dispositivosmoveis.gymplanner.entities.Treino
+import com.dispositivosmoveis.gymplanner.repository.TreinoRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TreinoFormActivity: AppCompatActivity() {
     private lateinit var etNomeTreino: EditText
@@ -47,19 +48,21 @@ class TreinoFormActivity: AppCompatActivity() {
         }
 
 
-        val treino = Treino(nome = nome, objetivos = objetivo)
+        val treino = Treino(nome = nome, objetivo = objetivo)
+        val treinoRepository = TreinoRepository(AppDatabase.getDatabase(this).treinoDao())
 
-        thread {
-            val context = applicationContext
-            val treinoId = AppDatabase.getDatabase(context).treinoDao().insert(treino)
-            runOnUiThread {
-                Toast.makeText(this, "Treino salvo com sucesso", Toast.LENGTH_SHORT).show()
-                Log.d("TreinoFormActivity", "ID do treino inserido: $treinoId")
-                val intent = Intent(this, ExerciciosActivity::class.java)
-                intent.putExtra("treinoId", treinoId)
-                startActivity(intent)
+        lifecycleScope.launch(Dispatchers.IO) {
+            treinoRepository.inserirTreino(treino)
+
+            withContext(Dispatchers.Main) {
+                Toast.makeText(
+                    this@TreinoFormActivity,
+                    "Treino salvo com sucesso!",
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
+
     }
 }

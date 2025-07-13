@@ -7,15 +7,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dispositivosmoveis.gymplanner.R
-import com.dispositivosmoveis.gymplanner.data.AppDatabase
+import com.dispositivosmoveis.gymplanner.database.AppDatabase
 import com.dispositivosmoveis.gymplanner.repository.TreinoRepository
 import com.dispositivosmoveis.gymplanner.ui.exercicios.ExerciciosActivity
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class TreinosActivity: AppCompatActivity() {
     private lateinit var recyclerViewTreinos: RecyclerView
-    private lateinit var fabAddTreino: FloatingActionButton
+    private lateinit var fabAddTreino: ExtendedFloatingActionButton
     private lateinit var treinoAdapter: TreinoAdapter
 
     private lateinit var treinoRepository: TreinoRepository
@@ -45,7 +46,6 @@ class TreinosActivity: AppCompatActivity() {
             }
         }
 
-        val fabAddTreino: FloatingActionButton = findViewById(R.id.fabAddTreino)
         fabAddTreino.setOnClickListener {
             val intent = Intent(this, TreinoFormActivity::class.java)
             startActivity(intent)

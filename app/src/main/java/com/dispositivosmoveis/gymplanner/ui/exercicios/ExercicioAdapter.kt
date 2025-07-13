@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dispositivosmoveis.gymplanner.R
-import com.dispositivosmoveis.gymplanner.data.Exercicio
+import com.dispositivosmoveis.gymplanner.entities.Exercicio
 
 class ExercicioAdapter(
     private val lista: List<Exercicio>

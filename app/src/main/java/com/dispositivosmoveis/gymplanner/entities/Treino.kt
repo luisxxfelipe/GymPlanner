@@ -1,4 +1,4 @@
-package com.dispositivosmoveis.gymplanner.data
+package com.dispositivosmoveis.gymplanner.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,5 +9,5 @@ class Treino (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val nome: String,
-    val objetivos: String
+    val objetivo: String
 )

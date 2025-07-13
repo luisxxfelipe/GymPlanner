@@ -1,4 +1,4 @@
-package com.dispositivosmoveis.gymplanner.data
+package com.dispositivosmoveis.gymplanner.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,5 +12,6 @@ class Exercicio(
     val descricao: String,
     val series: Int,
     val repeticoes: Int,
-    val treinoId: Long // Chave estrangeira para o treino
+    val treinoId: Long, // Chave estrangeira para o treino
+    val createdAt: Long = System.currentTimeMillis()
 )

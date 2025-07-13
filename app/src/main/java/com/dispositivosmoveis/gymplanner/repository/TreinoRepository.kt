@@ -1,7 +1,7 @@
 package com.dispositivosmoveis.gymplanner.repository
 
-import com.dispositivosmoveis.gymplanner.data.Treino
-import com.dispositivosmoveis.gymplanner.data.TreinoDao
+import com.dispositivosmoveis.gymplanner.entities.Treino
+import com.dispositivosmoveis.gymplanner.dao.TreinoDao
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,17 +10,17 @@ import kotlinx.coroutines.flow.Flow
  */
 
 class TreinoRepository(private val treinoDao: TreinoDao){
-    val listarTreinos : Flow<List<Treino>> = treinoDao.getAllTreinos()
+    val listarTreinos: Flow<List<Treino>> = treinoDao.getAllTreinos()
 
-    suspend fun inserirTreino(treino: Treino){
-        treinoDao.insert(treino)
+    suspend fun inserirTreino(treino: Treino) {
+        treinoDao.insert(treino) // agora permitido
     }
 
-    suspend fun atualizarTreino(treino: Treino){
+    suspend fun atualizarTreino(treino: Treino) {
         treinoDao.update(treino)
     }
 
-    suspend fun deletarTreino(treino: Treino){
+    suspend fun deletarTreino(treino: Treino) {
         treinoDao.delete(treino)
     }
 }

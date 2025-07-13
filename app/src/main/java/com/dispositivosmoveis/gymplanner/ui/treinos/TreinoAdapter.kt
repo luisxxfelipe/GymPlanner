@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dispositivosmoveis.gymplanner.R
-import com.dispositivosmoveis.gymplanner.data.Treino
+import com.dispositivosmoveis.gymplanner.entities.Treino
 
 class TreinoAdapter(
     private val treinos: List<Treino>,
@@ -27,7 +27,7 @@ class TreinoAdapter(
     override fun onBindViewHolder(holder: TreinoViewHolder, position: Int) {
         val treino = treinos[position]
         holder.tvNome.text = treino.nome
-        holder.tvObjetivo.text = treino.objetivos
+        holder.tvObjetivo.text = treino.objetivo
 
         holder.itemView.setOnClickListener {
             onItemClick(treino)
