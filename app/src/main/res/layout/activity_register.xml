@@ -71,12 +71,14 @@
                 android:layout_height="wrap_content"
                 android:hint="Nome completo"
                 app:boxStrokeColor="@color/roxo"
+                app:startIconTint="@color/roxo"
                 app:hintTextColor="@color/roxo"
                 app:startIconDrawable="@drawable/ic_user">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNome"
                     android:layout_width="match_parent"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:maxLines="1" />
@@ -92,11 +94,13 @@
                 android:hint="Nome de usuário"
                 app:boxStrokeColor="@color/roxo"
                 app:hintTextColor="@color/roxo"
+                app:startIconTint="@color/roxo"
                 app:startIconDrawable="@drawable/ic_account">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUsuario"
                     android:layout_width="match_parent"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:maxLines="1" />
@@ -113,12 +117,14 @@
                 app:boxStrokeColor="@color/roxo"
                 app:endIconMode="password_toggle"
                 app:hintTextColor="@color/roxo"
+                app:startIconTint="@color/roxo"
                 app:startIconDrawable="@drawable/ic_lock">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSenha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:inputType="textPassword"
                     android:maxLines="1" />
 
@@ -134,12 +140,14 @@
                 app:boxStrokeColor="@color/roxo"
                 app:endIconMode="password_toggle"
                 app:hintTextColor="@color/roxo"
+                app:startIconTint="@color/roxo"
                 app:startIconDrawable="@drawable/ic_lock_check">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etConfirmarSenha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:inputType="textPassword"
                     android:maxLines="1" />
 
@@ -152,6 +160,8 @@
                 android:layout_marginTop="24dp"
                 android:text="Criar Conta"
                 android:textSize="16sp"
+                android:textColor="@color/white"
+                app:iconTint="@color/white"
                 android:textStyle="bold"
                 app:backgroundTint="@color/roxo"
                 app:cornerRadius="16dp"

@@ -11,7 +11,7 @@ import com.dispositivosmoveis.gymplanner.dao.TreinoDao
 import com.dispositivosmoveis.gymplanner.dao.UserDao
 import com.dispositivosmoveis.gymplanner.entities.User
 
-@Database(entities = [Treino::class, Exercicio::class, User::class], version = 3, exportSchema = false)
+@Database(entities = [Treino::class, Exercicio::class, User::class], version = 6, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun treinoDao(): TreinoDao

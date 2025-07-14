@@ -23,6 +23,7 @@ interface ExercicioDao{
     @Query ("SELECT * FROM exercicios WHERE treinoId = :treinoId")
     fun getExerciciosByTreinoId(treinoId: Long): Flow <List<Exercicio>>
 
-
+    @Query("SELECT COUNT(*) FROM exercicios WHERE treinoId = :treinoId")
+    fun contarExerciciosPorTreino(treinoId: Long): Int
 
 }

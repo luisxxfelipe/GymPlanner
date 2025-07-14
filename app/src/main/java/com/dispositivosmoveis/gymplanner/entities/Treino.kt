@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "treinos")
 class Treino (
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val id: Long = 0,
     val nome: String,
-    val objetivo: String
+    val objetivo: String,
+    val usuarioId: Long
 )

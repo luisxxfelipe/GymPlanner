@@ -12,6 +12,7 @@ class Exercicio(
     val descricao: String,
     val series: Int,
     val repeticoes: Int,
+    val tempo: String,
     val treinoId: Long, // Chave estrangeira para o treino
     val createdAt: Long = System.currentTimeMillis()
 )

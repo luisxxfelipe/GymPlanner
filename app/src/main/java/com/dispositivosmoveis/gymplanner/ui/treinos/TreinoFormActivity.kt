@@ -17,11 +17,18 @@ import kotlinx.coroutines.withContext
 class TreinoFormActivity: AppCompatActivity() {
     private lateinit var etNomeTreino: EditText
     private lateinit var etObjetivoTreino: EditText
+    private var usuarioId: Long = -1
     private lateinit var btnSalvarTreino: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_treino_form)
+
+        usuarioId = intent.getLongExtra("usuarioId", -1)
+        if (usuarioId == -1L) {
+            finish()
+            return
+        }
 
         etNomeTreino = findViewById(R.id.etNomeTreino)
         etObjetivoTreino = findViewById(R.id.etObjetivoTreino)
@@ -33,22 +40,18 @@ class TreinoFormActivity: AppCompatActivity() {
     }
 
     private fun salvarTreino() {
-        val nome = etNomeTreino.text.toString()
-        val objetivo = etObjetivoTreino.text.toString().trim()
 
-        if (nome.isEmpty() || objetivo.isEmpty()) {
-            Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show()
+        val treino = Treino(
+            nome = etNomeTreino.text.toString(),
+            objetivo = etObjetivoTreino.text.toString(),
+            usuarioId = usuarioId
+        )
 
-            if (nome.length < 3) {
-                Toast.makeText(
-                    this, "O nome do treino deve ter no mínimo 3 caracteres", Toast.LENGTH_SHORT
-                ).show()
-                return
-            }
+        if (treino.nome.isBlank() || treino.objetivo.isBlank()) {
+            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+            return
         }
 
-
-        val treino = Treino(nome = nome, objetivo = objetivo)
         val treinoRepository = TreinoRepository(AppDatabase.getDatabase(this).treinoDao())
 
         lifecycleScope.launch(Dispatchers.IO) {

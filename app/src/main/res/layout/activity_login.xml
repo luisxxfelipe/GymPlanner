@@ -72,8 +72,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Usuário"
+                app:endIconTint="@color/roxo"
                 app:startIconDrawable="@drawable/ic_user"
                 app:boxStrokeColor="@color/roxo"
+                app:startIconTint="@color/roxo"
                 app:hintTextColor="@color/roxo"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
@@ -81,7 +83,9 @@
                     android:id="@+id/etUsuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:inputType="text"
+                    android:textColorHint="@color/gray_600"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -94,6 +98,7 @@
                 android:layout_marginTop="16dp"
                 app:startIconDrawable="@drawable/ic_lock"
                 app:endIconMode="password_toggle"
+                app:startIconTint="@color/roxo"
                 app:boxStrokeColor="@color/roxo"
                 app:hintTextColor="@color/roxo"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
@@ -102,6 +107,8 @@
                     android:id="@+id/etSenha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray_600"
                     android:inputType="textPassword"
                     android:maxLines="1" />
 
@@ -116,8 +123,10 @@
                 android:textStyle="bold"
                 android:layout_marginTop="24dp"
                 app:backgroundTint="@color/roxo"
+                android:textColor="@color/white"
                 app:cornerRadius="16dp"
                 app:icon="@drawable/ic_login"
+                app:iconTint="@color/white"
                 app:iconGravity="textStart" />
 
         </LinearLayout>

@@ -1,5 +1,6 @@
 package com.dispositivosmoveis.gymplanner.ui.treinos
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,14 @@ import com.dispositivosmoveis.gymplanner.entities.Treino
 
 class TreinoAdapter(
     private val treinos: List<Treino>,
+    private val exerciciosPorTreino: Map<Long, Int>,
     private val onItemClick: (Treino) -> Unit
 ) : RecyclerView.Adapter<TreinoAdapter.TreinoViewHolder>() {
 
     inner class TreinoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNome: TextView = itemView.findViewById(R.id.tvNomeTreino)
         val tvObjetivo: TextView = itemView.findViewById(R.id.tvObjetivoTreino)
+        val tvExercicios: TextView = itemView.findViewById(R.id.tvExerciciosCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TreinoViewHolder {
@@ -24,15 +27,21 @@ class TreinoAdapter(
         return TreinoViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: TreinoViewHolder, position: Int) {
         val treino = treinos[position]
         holder.tvNome.text = treino.nome
         holder.tvObjetivo.text = treino.objetivo
 
+        // Exibir número de exercícios
+        val totalEx = exerciciosPorTreino[treino.id.toLong()] ?: 0
+        holder.tvExercicios.text = "$totalEx exercícios"
+
         holder.itemView.setOnClickListener {
             onItemClick(treino)
         }
     }
+
 
     override fun getItemCount(): Int = treinos.size
 }

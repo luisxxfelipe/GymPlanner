@@ -16,6 +16,7 @@ class ExercicioAdapter(
         val nome: TextView = itemView.findViewById(R.id.tvNomeExercicio)
         val descricao: TextView = itemView.findViewById(R.id.tvDescricaoExercicio)
         val series: TextView = itemView.findViewById(R.id.tvSeries)
+        val tempo: TextView = itemView.findViewById(R.id.tvTempo)
         val repeticoes: TextView = itemView.findViewById(R.id.tvRepeticoes)
     }
 
@@ -29,8 +30,9 @@ class ExercicioAdapter(
         val exercicio = lista[position]
         holder.nome.text = exercicio.nome
         holder.descricao.text = exercicio.descricao
-        holder.series.text = "Séries: ${exercicio.series}"
-        holder.repeticoes.text = "Reps: ${exercicio.repeticoes}"
+        holder.tempo.text = "${exercicio.tempo}"
+        holder.series.text = "${exercicio.series}"
+        holder.repeticoes.text = "${exercicio.repeticoes}"
     }
 
     override fun getItemCount(): Int = lista.size

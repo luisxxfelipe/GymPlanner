@@ -22,6 +22,7 @@ class ExercicioFormActivity : AppCompatActivity() {
     private lateinit var etSeries: EditText
     private lateinit var etDescricaoExercicio: EditText
     private lateinit var btnSalvarExercicio: Button
+    private lateinit var etTempo: EditText
     private var treinoId: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,12 +33,11 @@ class ExercicioFormActivity : AppCompatActivity() {
         etRepeticoes = findViewById(R.id.etRepeticoes)
         etSeries = findViewById(R.id.etSeries)
         etDescricaoExercicio = findViewById(R.id.etDescricaoExercicio)
+        etTempo = findViewById(R.id.etTempo)
         btnSalvarExercicio = findViewById(R.id.btnSalvarExercicio)
 
 
         treinoId = intent.getLongExtra("treinoId", -1)
-        Log.d("ExercicioFormActivity", "TreinoId recebido: $treinoId")
-
 
         btnSalvarExercicio.setOnClickListener {
             salvarExercicio()
@@ -49,8 +49,12 @@ class ExercicioFormActivity : AppCompatActivity() {
         val repeticoes = etRepeticoes.text.toString().toIntOrNull()
         val descricao = etDescricaoExercicio.text.toString()
         val series = etSeries.text.toString().toIntOrNull()
+        val tempo = etTempo.text.toString()
 
-        if (nome.isBlank() || descricao.isBlank() || repeticoes == null || series == null || treinoId.toInt() == -1) {
+        Log.d("ExercicioFormActivity", "Tempo: $tempo treinoId: $treinoId nome: $nome repeticoes: $repeticoes descricao: $descricao series: $series tempo: $tempo")
+        if (nome.isBlank() || descricao.isBlank() || repeticoes == null || series == null
+            || treinoId.toInt() == -1
+        ) {
             Toast.makeText(
                 this,
                 "Por favor, preencha todos os campos corretamente",
@@ -64,7 +68,8 @@ class ExercicioFormActivity : AppCompatActivity() {
             repeticoes = repeticoes,
             descricao = descricao,
             series = series,
-            treinoId = treinoId
+            treinoId = treinoId,
+            tempo = tempo
         )
 
         val exercicioRepository = ExercicioRepository(AppDatabase.getDatabase(this).exercicioDao())

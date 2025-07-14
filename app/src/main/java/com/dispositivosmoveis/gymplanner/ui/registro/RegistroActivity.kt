@@ -1,4 +1,4 @@
-package com.dispositivosmoveis.gymplanner.ui.register
+package com.dispositivosmoveis.gymplanner.ui.registro
 
 import android.os.Bundle
 import android.widget.Button
@@ -13,7 +13,7 @@ import com.dispositivosmoveis.gymplanner.entities.User
 import com.dispositivosmoveis.gymplanner.repository.AuthRepository
 import kotlinx.coroutines.launch
 
-class RegisterActivity : AppCompatActivity() {
+class RegistroActivity : AppCompatActivity() {
 
     private lateinit var etNome: EditText
     private lateinit var etUsuario: EditText
@@ -81,14 +81,14 @@ class RegisterActivity : AppCompatActivity() {
             try {
                 authRepository.registerUser(User(username = usuario, password = senha))
                 Toast.makeText(
-                    this@RegisterActivity,
+                    this@RegistroActivity,
                     "Conta criada com sucesso!",
                     Toast.LENGTH_SHORT
                 ).show()
                 finish()
             } catch (e: Exception) {
                 Toast.makeText(
-                    this@RegisterActivity,
+                    this@RegistroActivity,
                     "Erro ao criar conta: ${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()

@@ -1,30 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Cores principais -->
-    <color name="roxo">#6B46C1</color>
-    <color name="roxo_light">#E0E7FF</color>
+    <!-- Primary Colors -->
+    <color name="roxo">#7C3AED</color>
+    <color name="roxo_light">#E8E6FF</color>
+    <color name="roxo_dark">#5A52D5</color>
+    <color name="black">#000000</color>
     <color name="primary_light">#F3F4F6</color>
 
-    <!-- Cores do sistema -->
+    <!-- Background Colors -->
+    <color name="background_light">#F8F9FA</color>
+    <color name="input_background">#F5F6FA</color>
+    <color name="stats_background">#F8F9FF</color>
+    <color name="description_background">#F0F1F5</color>
+    <color name="surface">#FFFFFF</color>
+
+    <!-- White Variations -->
     <color name="white">#FFFFFF</color>
     <color name="white_80">#CCFFFFFF</color>
     <color name="white_30">#4DFFFFFF</color>
-    <color name="black">#000000</color>
+    <color name="white_20">#33FFFFFF</color>
 
-    <!-- Cores de texto -->
-    <color name="text_primary">#1F2937</color>
+    <!-- Text Colors -->
+    <color name="text_primary">#1A1D29</color>
     <color name="text_secondary">#6B7280</color>
 
-    <!-- Cores de fundo -->
-    <color name="background_light">#F9FAFB</color>
-    <color name="surface">#FFFFFF</color>
+    <!-- Status Colors -->
 
-    <!-- Cores de estado -->
+    <color name="warning_light">#FEF3C7</color>
+    <color name="warning_dark">#D97706</color>
+
+    <color name="info">#3B82F6</color>
+    <color name="info_light">#DBEAFE</color>
+    <color name="info_dark">#1D4ED8</color>
+
+    <color name="error_light">#FEE2E2</color>
+    <color name="error_dark">#DC2626</color>
+
     <color name="success">#10B981</color>
     <color name="success_light">#D1FAE5</color>
     <color name="success_dark">#047857</color>
     <color name="warning">#F59E0B</color>
     <color name="error">#EF4444</color>
+
+    <!-- Dividers and Strokes -->
+    <color name="divider_light">#F3F4F6</color>
+    <color name="stroke_light">#E5E7EB</color>
+
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#6C63FF</color>
+    <color name="gradient_end">#9C88FF</color>
 
     <!-- Cores neutras -->
     <color name="gray_50">#F9FAFB</color>

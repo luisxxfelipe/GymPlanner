@@ -10,7 +10,10 @@ import kotlinx.coroutines.flow.Flow
  */
 
 class TreinoRepository(private val treinoDao: TreinoDao){
-    val listarTreinos: Flow<List<Treino>> = treinoDao.getAllTreinos()
+
+    fun buscarTreinosPorUsuario(usuarioId: Long): Flow<List<Treino>> {
+        return treinoDao.getAllTreinos(usuarioId)
+    }
 
     suspend fun inserirTreino(treino: Treino) {
         treinoDao.insert(treino) // agora permitido

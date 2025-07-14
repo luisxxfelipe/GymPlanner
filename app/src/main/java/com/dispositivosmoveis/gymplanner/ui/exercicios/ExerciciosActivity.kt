@@ -1,7 +1,10 @@
 package com.dispositivosmoveis.gymplanner.ui.exercicios
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,13 +13,13 @@ import com.dispositivosmoveis.gymplanner.R
 import com.dispositivosmoveis.gymplanner.database.AppDatabase
 import com.dispositivosmoveis.gymplanner.repository.ExercicioRepository
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class ExerciciosActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ExercicioAdapter
+    private lateinit var tvExerciciosCount: TextView
     private var treinoId: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +28,12 @@ class ExerciciosActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerViewExercicios)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        tvExerciciosCount = findViewById(R.id.tvExerciciosCount)
 
         // Pega o ID do treino que foi passado via intent
         treinoId = intent.getLongExtra("treinoId", -1)
+
+        Log.d("ExerciciosActivity", "Treino ID: $treinoId")
 
         if (treinoId.toInt() != -1) {
             carregarExercicios(treinoId)
@@ -41,11 +47,13 @@ class ExerciciosActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private fun carregarExercicios(treinoId: Long) {
         val exercicioRepository = ExercicioRepository(AppDatabase.getDatabase(this).exercicioDao())
 
         lifecycleScope.launch {
             exercicioRepository.listarExerciciosPorTreino(treinoId).collect { exercicios ->
+                tvExerciciosCount.text = String.format("%d", exercicios.size)
                 adapter = ExercicioAdapter(exercicios)
                 recyclerView.adapter = adapter
             }
