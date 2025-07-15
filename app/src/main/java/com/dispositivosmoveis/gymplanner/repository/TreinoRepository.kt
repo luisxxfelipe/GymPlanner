@@ -16,7 +16,7 @@ class TreinoRepository(private val treinoDao: TreinoDao){
     }
 
     suspend fun inserirTreino(treino: Treino) {
-        treinoDao.insert(treino) // agora permitido
+        treinoDao.insert(treino)
     }
 
     suspend fun atualizarTreino(treino: Treino) {
@@ -25,5 +25,9 @@ class TreinoRepository(private val treinoDao: TreinoDao){
 
     suspend fun deletarTreino(treino: Treino) {
         treinoDao.delete(treino)
+    }
+
+    suspend fun buscarTreinoPorId(treinoId: Long): Treino? {
+        return treinoDao.getTreinoById(treinoId)
     }
 }

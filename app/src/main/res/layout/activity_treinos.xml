@@ -18,8 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/gradient_background"
             app:title="Meus Treinos"
-            app:titleTextColor="@color/white"
-            app:menu="@menu/menu_treinos" />
+            app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

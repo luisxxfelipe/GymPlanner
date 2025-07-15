@@ -24,4 +24,7 @@ interface TreinoDao{
     @Query("SELECT * FROM treinos WHERE usuarioId = :usuarioId")
     fun getAllTreinos(usuarioId: Long): Flow<List<Treino>>
 
+    @Query("SELECT * FROM treinos WHERE id = :treinoId")
+    suspend fun getTreinoById(treinoId: Long): Treino?
+
 }

@@ -3,8 +3,8 @@ package com.dispositivosmoveis.gymplanner.ui.exercicios
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +13,7 @@ import com.dispositivosmoveis.gymplanner.R
 import com.dispositivosmoveis.gymplanner.database.AppDatabase
 import com.dispositivosmoveis.gymplanner.repository.ExercicioRepository
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ExerciciosActivity : AppCompatActivity() {
@@ -33,8 +34,6 @@ class ExerciciosActivity : AppCompatActivity() {
         // Pega o ID do treino que foi passado via intent
         treinoId = intent.getLongExtra("treinoId", -1)
 
-        Log.d("ExerciciosActivity", "Treino ID: $treinoId")
-
         if (treinoId.toInt() != -1) {
             carregarExercicios(treinoId)
         }
@@ -54,7 +53,32 @@ class ExerciciosActivity : AppCompatActivity() {
         lifecycleScope.launch {
             exercicioRepository.listarExerciciosPorTreino(treinoId).collect { exercicios ->
                 tvExerciciosCount.text = String.format("%d", exercicios.size)
-                adapter = ExercicioAdapter(exercicios)
+                adapter = ExercicioAdapter(
+                    exercicios,
+                    onEditar = { exercicio ->
+                        val intent =
+                            Intent(this@ExerciciosActivity, ExercicioFormActivity::class.java)
+                        intent.putExtra("modoEdicao", true)
+                        intent.putExtra("exercicioId", exercicio.id)
+                        intent.putExtra("treinoId", treinoId)
+                        startActivity(intent)
+                    },
+                    onExcluir = { exercicio ->
+                        AlertDialog.Builder(this@ExerciciosActivity)
+                            .setTitle("Excluir exercício")
+                            .setMessage("Tem certeza que deseja excluir este exercício?")
+                            .setPositiveButton("Sim") { _, _ ->
+                                lifecycleScope.launch(Dispatchers.IO) {
+                                    val dao = AppDatabase.getDatabase(this@ExerciciosActivity)
+                                        .exercicioDao()
+                                    dao.delete(exercicio)
+                                }
+                            }
+                            .setNegativeButton("Cancelar", null)
+                            .show()
+                    }
+                )
+
                 recyclerView.adapter = adapter
             }
         }

@@ -3,22 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_search"
-        android:title="Buscar"
-        android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom"
-        app:iconTint="@color/white" />
-
-    <item
-        android:id="@+id/action_profile"
-        android:title="Perfil"
-        android:icon="@drawable/ic_user"
-        app:showAsAction="ifRoom"
-        app:iconTint="@color/white" />
-
-    <item
         android:id="@+id/action_logout"
         android:title="Sair"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_logout"
+        app:showAsAction="ifRoom" />
 
 </menu>

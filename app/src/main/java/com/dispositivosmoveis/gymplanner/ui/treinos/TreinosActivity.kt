@@ -3,7 +3,10 @@ package com.dispositivosmoveis.gymplanner.ui.treinos
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +33,9 @@ class TreinosActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_treinos)
+
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         recyclerViewTreinos = findViewById(R.id.recyclerViewTreinos)
         fabAddTreino = findViewById(R.id.fabAddTreino)
@@ -76,8 +82,28 @@ class TreinosActivity: AppCompatActivity() {
                         val intent = Intent(this@TreinosActivity, ExerciciosActivity::class.java)
                         intent.putExtra("treinoId", treino.id)
                         startActivity(intent)
+                    },
+                    onEdit = { treino ->
+                        val intent = Intent(this@TreinosActivity, TreinoFormActivity::class.java)
+                        intent.putExtra("modoEdicao", true)
+                        intent.putExtra("treinoId", treino.id)
+                        intent.putExtra("usuarioId", usuarioId)
+                        startActivity(intent)
+                    },
+                    onDelete = { treino ->
+                        AlertDialog.Builder(this@TreinosActivity)
+                            .setTitle("Excluir treino")
+                            .setMessage("Tem certeza que deseja excluir o treino \"${treino.nome}\"?")
+                            .setPositiveButton("Sim") { _, _ ->
+                                lifecycleScope.launch(Dispatchers.IO) {
+                                    treinoRepository.deletarTreino(treino)
+                                }
+                            }
+                            .setNegativeButton("Cancelar", null)
+                            .show()
                     }
                 )
+
 
 
                 recyclerViewTreinos.adapter = treinoAdapter
@@ -91,4 +117,40 @@ class TreinosActivity: AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_treinos, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                mostrarDialogoLogout()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun mostrarDialogoLogout() {
+        AlertDialog.Builder(this)
+            .setTitle("Sair")
+            .setMessage("Deseja realmente sair da sua conta?")
+            .setPositiveButton("Sim") { _, _ ->
+                val prefs = getSharedPreferences("user_session", MODE_PRIVATE)
+                prefs.edit().clear().apply()
+
+                val intent = Intent(
+                    this,
+                    com.dispositivosmoveis.gymplanner.ui.login.LoginActivity::class.java
+                )
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
+    }
+
 }
